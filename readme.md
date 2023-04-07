@@ -5,5 +5,5 @@
 ~~~
 brew tap bayleeadamoss/formulae
 brew install dotties
-dotties install bayleedev/dotties
+dotties install mxbaylee/dotties
 ~~~
