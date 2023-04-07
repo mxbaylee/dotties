@@ -6,6 +6,7 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-sleuth'
 Plug 'pmsorhaindo/syntastic-local-eslint.vim'
 Plug 'moll/vim-node'
+Plug 'psf/black'
 
 " Syntax Highlighting
 Plug 'yalesov/vim-emblem'
@@ -14,9 +15,14 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
+Plug 'zah/nim.vim'
+Plug 'ap/vim-css-color'
 
 " From dotfiles
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+
+" JS Syntax
+Plug 'w0rp/ale'

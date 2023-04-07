@@ -80,3 +80,31 @@ let g:airline#extensions#tabline#enabled = 1
 if filereadable(expand("/Users/baylee.schmeisser/.vimrc.env"))
   source /Users/baylee.schmeisser/.vimrc.env
 endif
+
+" Mouse Support
+set mouse=a
+
+" JS Support
+let g:ale_fixers = {
+ \ 'javascript': ['eslint']
+ \ }
+
+" ## VIM MOVEMENTS ##
+" Leader key
+let mapleader = " "
+
+" Quicker window movement
+nnoremap <leader>n :bn<CR>
+nnoremap <leader>p :bp<CR>
+nnoremap <leader># :b#<CR>
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" ## VIM Plugin ##
+if filereadable(expand("~/.vimrc.bundles"))
+  call plug#begin('~/.vim/plugged')
+  source ~/.vimrc.bundles
+  call plug#end()
+endif

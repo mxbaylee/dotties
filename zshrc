@@ -3,14 +3,11 @@ export PATH="$HOME/.bin:$PATH"
 export ZSH=~/.oh-my-zsh
 
 setnvm() {
- if [ "$PWD" != "$MYOLDPWD" ]; then
-   MYOLDPWD="$PWD";
-   if [ -e "$PWD/.nvmrc" ]; then
-     nvm use
-   elif [ -e "$PWD/.node-version" ]; then
-     nvm use $(cat $PWD/.node-version)
-   fi
- fi
+  if [ -e "$PWD/.nvmrc" ]; then
+    nvm use
+  elif [ -e "$PWD/.node-version" ]; then
+    nvm use $(cat $PWD/.node-version)
+  fi
 }
 function cd () { builtin cd "$@" && setnvm; }
 

@@ -1,0 +1,50 @@
+#!/bin/sh
+
+export PATH="$PATH:/opt/homebrew/bin/"
+echo $PATH
+exit 0
+
+function help {
+  echo ""
+  echo "🐍 Yeah, I know these aren't intuitive, I got you. Here ya go, friend."
+  echo "> the actual commands look like terminal promtps"
+  echo "⭐  the command if the creator cared about UX"
+  echo ""
+
+  echo "🐍 Create a new environment:"
+  echo ">  mkvirtualenv NAME"
+  echo "⭐  pvm create NAME"
+  echo ""
+
+  echo "🐍 Use environment:"
+  echo ">  workon NAME"
+  echo "⭐  pvm use NAME"
+  echo ""
+
+  echo "🐍 List environment:"
+  echo ">  lsvirtualenv -b"
+  echo "⭐  pvm list"
+  echo ""
+}
+
+if [ $# -eq 0 ]; then
+  help
+  exit 0
+fi
+
+if [ "$1" = "list" ]; then
+  lsvirtualenv -b
+  exit 0
+fi
+
+if [ "$1" = "create" ]; then
+  mkvirtualenv $2
+  exit 0
+fi
+
+if [ "$1" = "use" ]; then
+  workon $2
+  exit 0
+fi
+
+help
