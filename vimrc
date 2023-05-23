@@ -59,8 +59,8 @@ let g:loaded_netrwPlugin = 1
 set splitbelow
 set splitright
 
-" Make it obvious where 80 characters is
-set textwidth=80
+" Make it obvious where 95 characters is
+set textwidth=95
 set colorcolumn=+1
 
 " Numbers
