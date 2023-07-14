@@ -1,0 +1,28 @@
+#!/bin/bash
+
+###
+# Usage:
+# infinite [sleep_seconds] command
+#
+# Arguments:
+# sleep_time: The number of seconds to sleep between executions of the command. If this argument is not specified, the default sleep time is 0 seconds.
+# command: The command to execute.
+###
+
+is_number() {
+  [[ "$1" =~ ^[0-9]+$ ]]
+}
+
+sleep_time=${1}
+if ! is_number "$sleep_time"; then
+  sleep_time=0
+else
+  shift
+fi
+
+command="$@"
+
+while true; do
+  eval "$command"
+  sleep $sleep_time
+done
