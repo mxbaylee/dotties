@@ -2,14 +2,36 @@ ZSH_THEME="avit"
 export PATH="$HOME/.bin:$PATH"
 export ZSH=~/.oh-my-zsh
 
-setnvm() {
+function setnvm() {
   if [ -e "$PWD/.nvmrc" ]; then
     nvm use
   elif [ -e "$PWD/.node-version" ]; then
     nvm use $(cat $PWD/.node-version)
   fi
 }
-function cd () { builtin cd "$@" && setnvm; }
+
+function window_name() {
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    root_dir=$(git rev-parse --show-toplevel)
+  else
+    root_dir="$PWD"
+  fi
+
+  basename "$root_dir"
+}
+
+function cd () {
+  # real functionality
+  builtin cd "$@"
+
+  # nvm
+  setnvm
+
+  # tmux rename
+  if [ -n "$TMUX" ]; then
+    tmux rename-window $(window_name)
+  fi
+}
 
 plugins=(rbenv nvm autojump)
 
