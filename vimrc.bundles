@@ -16,6 +16,7 @@ Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
 Plug 'zah/nim.vim'
 Plug 'ap/vim-css-color'
+Plug 'jdonaldson/vaxe'
 
 " From dotfiles
 Plug 'ctrlpvim/ctrlp.vim'
