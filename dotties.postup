@@ -4,4 +4,4 @@ if [ ! -e ~/.vim/autoload/plug.vim ]; then
   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
-vim -u ~/.dotties/packages/bayleedev-dotties/vimrc +PlugInstall +PlugClean! +qa
+vim -u ~/.dotties/packages/mxbaylee-dotties/vimrc +PlugInstall +PlugClean! +qa
