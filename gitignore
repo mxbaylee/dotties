@@ -1,2 +1,4 @@
 mynotes.md
 venv
+package-lock.json
+.husky
