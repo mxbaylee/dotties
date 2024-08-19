@@ -1,0 +1,10 @@
+#!/bin/sh
+
+current_branch=$(git symbolic-ref --short HEAD)
+
+if [ -z "$current_branch" ]; then
+  echo "Error: Unable to determine the current branch."
+  exit 1
+fi
+
+git branch --set-upstream-to=origin/"$current_branch" "$current_branch"
