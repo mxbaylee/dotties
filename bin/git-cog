@@ -1,5 +1,13 @@
 #!/bin/sh
 
+# This script helps you search for and checkout a Git branch based on a search term.
+#
+# Usage:
+#   git cog <search-term>
+#
+# Dependencies:
+# - `ag` (The Silver Searcher): `brew install the_silver_searcher`.
+
 if [ -z "$1" ]; then
   echo "Usage: git cog <search-term>"
   exit 1
