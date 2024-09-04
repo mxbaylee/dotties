@@ -6,6 +6,8 @@ Plug 'bling/vim-airline'
 Plug 'tpope/vim-sleuth'
 Plug 'github/copilot.vim'
 Plug 'moll/vim-node'
+Plug 'w0rp/ale'
+Plug 'moll/vim-node'
 
 " Syntax Highlighting
 Plug 'yalesov/vim-emblem'

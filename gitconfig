@@ -24,7 +24,7 @@
   cleanup = !git fetch origin && git reset --hard origin/`git rev-parse --abbrev-ref HEAD`
   oppppen = !vim `git-open`
   oooopen = !vim `git show --pretty="format:" --name-only HEAD`
-  work = config user.email "bschmeisser@netflix.com"
+  work = config user.email "baylee@mintlify.com"
   fixup = commit --fixup
   squash = commit --squash
   review = !sh -c 'reflog-review'
