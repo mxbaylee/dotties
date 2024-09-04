@@ -7,7 +7,7 @@ fi
 
 search_term="$1"
 
-branch=$(git branch | ag "$search_term" | head -n 1 | sed 's/^\* //')
+branch=$(git branch | ag "$search_term" | head -n 1 | sed 's/^\* //' | tr -d '[:space:]')
 
 if [ -z "$branch" ]; then
   echo "No branch found matching '$search_term'"
