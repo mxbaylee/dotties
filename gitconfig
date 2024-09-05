@@ -30,14 +30,8 @@
   review = !sh -c 'reflog-review'
 [push]
   default = current
-[merge]
-  ff = only
 [fetch]
   prune = true
-[filter "lfs"]
-  clean = git-lfs clean %f
-  smudge = git-lfs smudge %f
-  required = true
 [init]
   defaultBranch = main
 [pager]
