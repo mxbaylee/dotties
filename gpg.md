@@ -16,7 +16,7 @@ gpg --gen-key
 This is useful if you have a work email you also commit as.
 
 ~~~
-gpg --edit-key blainesch@gmail.com
+gpg --edit-key email@gmail.com
 ~~~
 
 In the GPG shell:
@@ -30,7 +30,7 @@ adduid
 Give your public key to Github.
 
 ~~~
-gpg --armor --export blainesch@gmail.com
+gpg --armor --export email@gmail.com
 ~~~
 
 ## Add GPG key to Keybase
@@ -46,7 +46,7 @@ keybase pgp select
 I imported this into [1password](https://1password.com/features/). Skip this if you this is managed by keybase.
 
 ~~~
-gpg --export-secret-key -a blainesch@gmail.com > gpg-private.key
+gpg --export-secret-key -a email@gmail.com > gpg-private.key
 ~~~
 
 ## Import Private Key into GPG
