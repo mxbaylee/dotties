@@ -30,6 +30,8 @@
   review = !sh -c 'reflog-review'
 [push]
   default = current
+[pull]
+  rebase = false
 [fetch]
   prune = true
 [init]
