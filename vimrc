@@ -37,15 +37,13 @@ set list listchars=tab:»·,trail:·,nbsp:·
 set nojoinspaces
 
 " Use Ripgrep `brew install ripgrep`
+" https://gist.github.com/darrylhebbes/4cc1b0995c265e8e08509b48954642c6
 if executable('rg')
-  " Use Ripgrep over Grep
-  set grepprg=rg\ --no-heading\ --vimgrep\ --smart-case
-
-  " Use ripgrep in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'rg -l --hidden --no-heading --follow %s'
-
-  " ripgrep is fast enough that CtrlP doesn't need to cache
+  set grepprg=rg\ --color=never
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
+else
+  let g:ctrlp_clear_cache_on_exit = 0
 endif
 
 " Resize windows when you resize vim
