@@ -4,7 +4,6 @@ Plug 'altercation/vim-colors-solarized'
 " Utility
 Plug 'bling/vim-airline'
 Plug 'tpope/vim-sleuth'
-Plug 'github/copilot.vim'
 Plug 'moll/vim-node'
 Plug 'w0rp/ale'
 Plug 'moll/vim-node'
@@ -18,7 +17,6 @@ Plug 'jparise/vim-graphql'
 Plug 'leafgarland/typescript-vim'
 Plug 'zah/nim.vim'
 Plug 'ap/vim-css-color'
-Plug 'jdonaldson/vaxe'
 
 " From dotfiles
 Plug 'ctrlpvim/ctrlp.vim'
