@@ -8,26 +8,20 @@
 [color]
   ui = auto
 [alias]
+  work = config user.email "bschmeisser@stytch.com"
   cb = !git rev-parse --abbrev-ref head | pbcopy
-  deleteBranches = !git branch --merged | egrep -v '(master|gh-pages)' | xargs git branch -d
   wip = !git commit --no-verify -m \"wip\"
-  lint = !git commit --no-verify -m \"🧹 Make linters happy.\"
-  retry = !git wip --amend
   aa = add --all
   ap = add --patch
   ci = commit -v
   ca = commit -v --amend
   co = checkout
-  pf = push --force-with-lease
   st = status
   lg = log --stat --summary --show-signature
-  cleanup = !git fetch origin && git reset --hard origin/`git rev-parse --abbrev-ref HEAD`
-  oppppen = !vim `git-open`
-  oooopen = !vim `git show --pretty="format:" --name-only HEAD`
-  work = config user.email "baylee@stytch.com"
   fixup = commit --fixup
   squash = commit --squash
-  review = !sh -c 'reflog-review'
+  track = !git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD)
+  col = "!f() { if [ $# -eq 1 ]; then branch=$(linear-branch-decorator \"$1\"); git checkout -b \"$branch\"; else git checkout \"$@\"; fi; }; f"
 [push]
   default = current
 [pull]
