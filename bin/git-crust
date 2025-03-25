@@ -24,20 +24,33 @@ LOG_FILE=~/.git-crust-log
 echo "--- 🥪 Git Crust Run $(date '+%Y-%m-%d %H:%M:%S') ---" >> "$LOG_FILE"
 echo "🎁 Repo CWD: $(pwd)" >> "$LOG_FILE"
 
-# Get local branches (excluding main)
-local_branches=$(git branch | grep -v "main" | sed 's/^[ *]*//')
+# Get local branches (excluding main & current branch)
+current_branch=$(git rev-parse --abbrev-ref HEAD)
+local_branches=$(git branch | grep -v "main" | grep -v "$current_branch" | sed 's/^[ *]*//')
 
 # Get remote branches (strip origin/ prefix)
 remote_branches=$(git branch -r | grep "origin/" | sed 's/origin\///')
 
-echo "The following local branches will be deleted (they don't exist on remote):"
+# Track if we found any branches to delete
+found_branches=false
+
 for branch in $local_branches; do
   if ! echo "$remote_branches" | grep -q "^$branch$"; then
+    if [ "$found_branches" = false ]; then
+      echo "❗ Branches to delete:"
+      found_branches=true
+    fi
     sha=$(git rev-parse "$branch")
-    echo "📍 Found: $branch ($sha)"
-    echo "📍 Found: $branch ($sha)" >> "$LOG_FILE"
+    echo "📍 Found: \`$branch\` ($sha)"
+    echo "📍 Found: \`$branch\` ($sha)" >> "$LOG_FILE"
   fi
 done
+
+# Exit if no branches found to delete
+if [ "$found_branches" = false ]; then
+  echo "No branches to clean! 🎉"
+  exit 0
+fi
 
 read -p "Continue? (y/n) " -n 1 -r
 echo
@@ -46,8 +59,8 @@ then
   for branch in $local_branches; do
     if ! echo "$remote_branches" | grep -q "^$branch$"; then
       sha=$(git rev-parse "$branch")
-      echo "💥 Deleted: $branch ($sha)"
-      echo "💥 Deleted: $branch ($sha)" >> "$LOG_FILE"
+      echo "💥 Deleted: \`$branch\` ($sha)"
+      echo "💥 Deleted: \`$branch\` ($sha)" >> "$LOG_FILE"
       git branch -D "$branch"
     fi
   done
