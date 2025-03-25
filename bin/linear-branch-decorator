@@ -14,7 +14,7 @@
 
 # Ensure LINEAR_KEY is set
 if [ -z "$LINEAR_KEY" ]; then
-  echo "Error: LINEAR_KEY environment variable is not set."
+  echo "🔴 Error: LINEAR_KEY environment variable is not set."
   exit 1
 fi
 
@@ -27,9 +27,9 @@ fi
 
 # Ensure a branch name is provided
 if [ -z "$1" ]; then
-  echo "Usage: $0 [-v] <branch-name>"
-  echo "Example: $0 bschmeisser/web-3300"
-  echo "Example (verbose): $0 -v bschmeisser/web-3300"
+  echo "💁 Usage: $0 [-v] <branch-name>"
+  echo "💁 Example: $0 bschmeisser/web-3300"
+  echo "💁 Example (verbose): $0 -v bschmeisser/web-3300"
   exit 1
 fi
 
@@ -38,7 +38,7 @@ BRANCH="$1"
 TICKET_ID=$(echo "$BRANCH" | grep -oE '[a-z]+-[0-9]+')
 
 if [ -z "$TICKET_ID" ]; then
-  echo "Error: Unable to extract ticket ID from branch name."
+  echo "🔴 Error: Unable to extract ticket ID from branch name."
   exit 1
 fi
 
@@ -46,7 +46,7 @@ fi
 QUERY="{ \"query\": \"query { issue(id: \\\"$TICKET_ID\\\") { id title description } }\" }"
 
 if $VERBOSE; then
-  echo "Debug: Query payload: $QUERY"
+  echo "🔍 Debug: Query payload: $QUERY"
 fi
 
 # Query the Linear API
@@ -57,14 +57,14 @@ RESPONSE=$(curl -s -X POST \
   https://api.linear.app/graphql)
 
 if $VERBOSE; then
-  echo "Debug: cURL response: $RESPONSE"
+  echo "🔍 Debug: cURL response: $RESPONSE"
 fi
 
 # Extract the title from the JSON response
 TITLE=$(echo "$RESPONSE" | jq -r '.data.issue.title' 2>/dev/null)
 
 if [ -z "$TITLE" ] || [ "$TITLE" == "null" ]; then
-  echo "Error: Unable to fetch issue title. Response: $RESPONSE"
+  echo "🔴 Error: Unable to fetch issue title. Response: $RESPONSE"
   exit 1
 fi
 
@@ -79,7 +79,7 @@ NEW_BRANCH="${BRANCH}-${TITLE_SLUG}"
 
 # Output only the branch name unless in verbose mode
 if $VERBOSE; then
-  echo "New branch name: $NEW_BRANCH"
+  echo "✅ New branch name: $NEW_BRANCH"
 else
   echo "$NEW_BRANCH"
 fi

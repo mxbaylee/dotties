@@ -21,8 +21,8 @@ git fetch --prune
 
 # Set up log file with timestamp
 LOG_FILE=~/.git-crust-log
-echo "--- Git Crust Run $(date '+%Y-%m-%d %H:%M:%S') ---" >> "$LOG_FILE"
-echo "Repo CWD: $(pwd)" >> "$LOG_FILE"
+echo "--- 🥪 Git Crust Run $(date '+%Y-%m-%d %H:%M:%S') ---" >> "$LOG_FILE"
+echo "🎁 Repo CWD: $(pwd)" >> "$LOG_FILE"
 
 # Get local branches (excluding main)
 local_branches=$(git branch | grep -v "main" | sed 's/^[ *]*//')
@@ -34,8 +34,8 @@ echo "The following local branches will be deleted (they don't exist on remote):
 for branch in $local_branches; do
   if ! echo "$remote_branches" | grep -q "^$branch$"; then
     sha=$(git rev-parse "$branch")
-    echo "Found: $branch ($sha)"
-    echo "Found: $branch ($sha)" >> "$LOG_FILE"
+    echo "📍 Found: $branch ($sha)"
+    echo "📍 Found: $branch ($sha)" >> "$LOG_FILE"
   fi
 done
 
@@ -46,8 +46,8 @@ then
   for branch in $local_branches; do
     if ! echo "$remote_branches" | grep -q "^$branch$"; then
       sha=$(git rev-parse "$branch")
-      echo "Deleted: $branch ($sha)"
-      echo "Deleted: $branch ($sha)" >> "$LOG_FILE"
+      echo "💥 Deleted: $branch ($sha)"
+      echo "💥 Deleted: $branch ($sha)" >> "$LOG_FILE"
       git branch -D "$branch"
     fi
   done

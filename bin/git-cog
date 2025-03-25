@@ -9,7 +9,7 @@
 # - `rg` (ripgrep): `brew install ripgrep`.
 
 if [ -z "$1" ]; then
-  echo "Usage: git cog <search-term>"
+  echo "💁 Usage: git cog <search-term>"
   exit 1
 fi
 
@@ -18,7 +18,7 @@ search_term="$1"
 branch=$(git branch | rg "$search_term" | head -n 1 | sed 's/^\* //' | tr -d '[:space:]')
 
 if [ -z "$branch" ]; then
-  echo "No branch found matching '$search_term'"
+  echo "💁 No branch found matching '$search_term'"
   exit 1
 fi
 
