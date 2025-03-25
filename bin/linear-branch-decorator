@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# linear-branch-decorator 🏷️
+# Appends Linear ticket title to branch names.
+# Requires LINEAR_KEY environment variable.
+#
+# Usage:
+#   linear-branch-decorator bschmeisser/web-3300     # Adds ticket title
+#   linear-branch-decorator -v bschmeisser/web-3300  # Verbose output
+#
+# Example:
+#   Input:  bschmeisser/web-3300
+#   Output: bschmeisser/web-3300-add-auth-docs
+
 # Ensure LINEAR_KEY is set
 if [ -z "$LINEAR_KEY" ]; then
   echo "Error: LINEAR_KEY environment variable is not set."

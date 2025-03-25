@@ -1,8 +1,10 @@
 #!/bin/sh
+
+# Find and replace text in files.
 #
-# Find and replace by a given list of files.
-#
-# replace foo bar **/*.rb
+# Usage:
+#   replace old new
+#   replace old new **/*.js
 
 find_this="$1"
 shift

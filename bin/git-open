@@ -1,9 +1,19 @@
 #!/bin/bash
 
+# Opens modified files in vim. If no uncommitted changes,
+# opens files from last commit.
+#
+# Usage:
+#   git open
+#
+# Opens:
+#   🔄 Uncommitted changes (if any)
+#   📝 Last commit's files (if clean)
+
 dirty=`git status --porcelain -uno | sed s/^...//`
 last_modified=`git show --pretty="format:" --name-only HEAD`
 
-if [ -n "$dirty" ]; then 
+if [ -n "$dirty" ]; then
     vim $dirty
 else
     vim $last_modified

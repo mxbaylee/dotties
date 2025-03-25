@@ -1,6 +1,6 @@
-## Local Dotfiles
+# 🐜 Local Dotfiles
 
-## Install
+## 🌈 Install
 
 ~~~
 brew tap bayleeadamoss/formulae
@@ -8,12 +8,12 @@ brew install dotties
 dotties install mxbaylee/dotties
 ~~~
 
-## Keyboard
+## 🟣 Configuration
 
 OSX Modifier Keys
 
 * `Caps Lock key`: `Option`
 
-iTerm 
+iTerm
 
 * `Keys` => `General` => `Option Key`: `Esc+`

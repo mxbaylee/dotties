@@ -12,18 +12,31 @@
 [color]
   ui = auto
 [alias]
+  # Copy current branch name to clipboard 📋
   cb = !git rev-parse --abbrev-ref head | pbcopy
+  # Quick commit without hooks - "work in progress" 🚧
   wip = !git commit --no-verify -m \"wip\"
+  # Stage all changes (including untracked) ✨
   aa = add --all
+  # Interactive staging - choose chunks to add 🔍
   ap = add --patch
+  # Commit with verbose diff view 📝
   ci = commit -v
+  # Amend last commit with current date 🕒
   ca = !git commit --amend -v --date=\"$(date +%Y-%m-%dT%H:%M:%S)\"
+  # Shorthand for checkout 🔄
   co = checkout
+  # Shorthand for status 📊
   st = status
+  # Detailed log with stats and signatures 📜
   lg = log --stat --summary --show-signature
+  # Mark commit to be fixed up in rebase 🔧
   fixup = commit --fixup
+  # Mark commit to be squashed in rebase 🤏
   squash = commit --squash
+  # Set upstream to origin/current-branch 🔗
   track = !git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD)
+  # Checkout new branch with Linear ticket title 🏷️
   col = "!f() { if [ $# -eq 1 ]; then branch=$(linear-branch-decorator \"$1\"); git checkout -b \"$branch\"; else git checkout \"$@\"; fi; }; f"
 [push]
   default = current

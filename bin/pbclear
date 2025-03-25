@@ -1,3 +1,8 @@
 #!/bin/sh
 
+# Clears the clipboard (macOS).
+#
+# Usage:
+#   pbclear
+
 pbcopy < /dev/null

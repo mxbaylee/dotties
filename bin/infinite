@@ -1,13 +1,13 @@
 #!/bin/bash
 
-###
-# Usage:
-# infinite [sleep_seconds] command
+# Repeatedly runs a command with optional delay between executions.
 #
-# Arguments:
-# sleep_time: The number of seconds to sleep between executions of the command. If this argument is not specified, the default sleep time is 0 seconds.
-# command: The command to execute.
-###
+# Usage:
+#   infinite         command  # Run continuously
+#   infinite 5       command  # Run every 5 seconds
+#
+# Example:
+#   infinite 2 date  # Shows date every 2 seconds
 
 is_number() {
   [[ "$1" =~ ^[0-9]+$ ]]

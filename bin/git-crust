@@ -1,5 +1,15 @@
 #!/bin/bash
 
+# Safely removes local branches that don't exist on remote origin anymore.
+#
+# Usage:
+#   git crust    # Preview and remove stale branches
+#
+# Safety:
+#   🛡️ Protects: main
+#   📝 Logs to: ~/.git-crust-log
+#   ✅ Requires confirmation
+
 # First fetch and prune to ensure our remote refs are up to date
 git fetch --prune
 
@@ -8,8 +18,8 @@ LOG_FILE=~/.git-crust-log
 echo "--- Git Crust Run $(date '+%Y-%m-%d %H:%M:%S') ---" >> "$LOG_FILE"
 echo "Repo CWD: $(pwd)" >> "$LOG_FILE"
 
-# Get local branches (excluding main and fix/throw)
-local_branches=$(git branch | grep -v "main" | grep -v "fix/throw" | sed 's/^[ *]*//')
+# Get local branches (excluding main)
+local_branches=$(git branch | grep -v "main" | sed 's/^[ *]*//')
 
 # Get remote branches (strip origin/ prefix)
 remote_branches=$(git branch -r | grep "origin/" | sed 's/origin\///')

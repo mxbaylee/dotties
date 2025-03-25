@@ -1,5 +1,11 @@
 #!/bin/sh
 
+# Converts text to URL-friendly slug format.
+#
+# Usage:
+#   slugify "Hello World!"
+#   slugify "http://example.com"
+
 echo $1 | \
   iconv -t ascii//TRANSLIT | \
   tr A-Z a-z | \
