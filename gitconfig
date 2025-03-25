@@ -17,7 +17,7 @@
   aa = add --all
   ap = add --patch
   ci = commit -v
-  ca = commit -v --amend
+  ca = !git commit --amend -v --date=\"$(date +%Y-%m-%dT%H:%M:%S)\"
   co = checkout
   st = status
   lg = log --stat --summary --show-signature
