@@ -3,12 +3,18 @@
 # Safely removes local branches that don't exist on remote origin anymore.
 #
 # Usage:
-#   git crust    # Preview and remove stale branches
+#   git crust
 #
 # Safety:
 #   🛡️ Protects: main
 #   📝 Logs to: ~/.git-crust-log
 #   ✅ Requires confirmation
+
+# Fail fast if not in a git repo
+if ! git rev-parse --git-dir > /dev/null 2>&1; then
+  echo "🪲 Error: Not in a git repository" >&2
+  exit 1
+fi
 
 # First fetch and prune to ensure our remote refs are up to date
 git fetch --prune
