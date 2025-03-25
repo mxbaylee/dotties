@@ -17,7 +17,7 @@ if ! git rev-parse --git-dir > /dev/null 2>&1; then
 fi
 
 # First fetch and prune to ensure our remote refs are up to date
-git fetch --prune
+git fetch -q --prune
 
 # Set up log file with timestamp
 LOG_FILE=~/.git-crust-log
@@ -29,7 +29,7 @@ current_branch=$(git rev-parse --abbrev-ref HEAD)
 local_branches=$(git branch | grep -v "main" | grep -v "$current_branch" | sed 's/^[ *]*//')
 
 # Get remote branches (strip origin/ prefix)
-remote_branches=$(git branch -r | grep "origin/" | sed 's/origin\///')
+remote_branches=$(git branch -r | grep "origin/" | sed 's/origin\///' | sed 's/^[ *]*//')
 
 # Track if we found any branches to delete
 found_branches=false
