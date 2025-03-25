@@ -1,1 +1,38 @@
-git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+#!/bin/bash
+
+# First fetch and prune to ensure our remote refs are up to date
+git fetch --prune
+
+# Set up log file with timestamp
+LOG_FILE=~/.git-crust-log
+echo "--- Git Crust Run $(date '+%Y-%m-%d %H:%M:%S') ---" >> "$LOG_FILE"
+echo "Repo CWD: $(pwd)" >> "$LOG_FILE"
+
+# Get local branches (excluding main and fix/throw)
+local_branches=$(git branch | grep -v "main" | grep -v "fix/throw" | sed 's/^[ *]*//')
+
+# Get remote branches (strip origin/ prefix)
+remote_branches=$(git branch -r | grep "origin/" | sed 's/origin\///')
+
+echo "The following local branches will be deleted (they don't exist on remote):"
+for branch in $local_branches; do
+  if ! echo "$remote_branches" | grep -q "^$branch$"; then
+    sha=$(git rev-parse "$branch")
+    echo "Found: $branch ($sha)"
+    echo "Found: $branch ($sha)" >> "$LOG_FILE"
+  fi
+done
+
+read -p "Continue? (y/n) " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+  for branch in $local_branches; do
+    if ! echo "$remote_branches" | grep -q "^$branch$"; then
+      sha=$(git rev-parse "$branch")
+      echo "Deleted: $branch ($sha)"
+      echo "Deleted: $branch ($sha)" >> "$LOG_FILE"
+      git branch -D "$branch"
+    fi
+  done
+fi
