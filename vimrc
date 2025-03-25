@@ -83,9 +83,7 @@ endif
 set mouse=a
 
 " JS Support
-let g:ale_fixers = {
- \ 'javascript': ['eslint']
- \ }
+let g:ale_fixers = { 'javascript': ['eslint'] }
 
 " ## VIM MOVEMENTS ##
 " Leader key
