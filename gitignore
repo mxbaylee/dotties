@@ -1,4 +1,6 @@
 mynotes.md
 venv
+.yarn
 .husky
 node_modules
+.DS_Store

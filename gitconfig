@@ -1,6 +1,10 @@
 [user]
   name = Baylee Schmeisser
   email = github.mx@baylee.dev
+[includeIf "gitdir:~/projects/web/"]
+  path = ~/.gitconfig-work
+[includeIf "exists:~/.gitconfig.local"]
+  path = ~/.gitconfig.local
 [core]
   editor = vim
   excludesfile = ~/.gitignore
@@ -8,7 +12,6 @@
 [color]
   ui = auto
 [alias]
-  work = config user.email "bschmeisser@stytch.com"
   cb = !git rev-parse --abbrev-ref head | pbcopy
   wip = !git commit --no-verify -m \"wip\"
   aa = add --all

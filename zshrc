@@ -2,6 +2,8 @@ ZSH_THEME="avit"
 export PATH="$HOME/.bin:$PATH"
 export ZSH=~/.oh-my-zsh
 
+alias beep="osascript -e 'beep'"
+
 function setnvm() {
   if [ -e "$PWD/.nvmrc" ]; then
     nvm use
@@ -33,7 +35,7 @@ function cd () {
   fi
 }
 
-plugins=(rbenv nvm autojump)
+plugins=(nvm autojump)
 
 source $ZSH/oh-my-zsh.sh
 
