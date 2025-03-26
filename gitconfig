@@ -1,9 +1,9 @@
 [user]
   name = Baylee Schmeisser
   email = github.mx@baylee.dev
-[includeIf "hasconfig:remote.*.url:*stytchauth*"]
+[includeIf "hasconfig:remote.*.url:git@github.com:stytchauth/**"]
   path = ~/.gitconfig-work
-[includeIf "exists:~/.gitconfig.local"]
+[include]
   path = ~/.gitconfig.local
 [core]
   editor = vim
