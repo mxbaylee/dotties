@@ -26,10 +26,10 @@ echo "🎁 Repo CWD: $(pwd)" >> "$LOG_FILE"
 
 # Get local branches (excluding main & current branch)
 current_branch=$(git rev-parse --abbrev-ref HEAD)
-local_branches=$(git branch | grep -v "main" | grep -v "$current_branch" | sed 's/^[ *]*//')
+local_branches=$(git branch | sed 's/^..//' | grep -v "^main$" | grep -v "^$current_branch$")
 
 # Get remote branches (strip origin/ prefix)
-remote_branches=$(git branch -r | grep "origin/" | sed 's/origin\///' | sed 's/^[ *]*//')
+remote_branches=$(git branch -r | grep "^ *origin/" | sed 's|^ *origin/||')
 
 # Track if we found any branches to delete
 found_branches=false
