@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# This script helps you manage AWS credentials using aws-vault and 1Password integration 🔐
+#
+# Usage:
+#   aws-vault-op [options]
+#
+# Environment Variables:
+#   OP_ACCOUNT - Optional: Your 1Password account domain (e.g., "my.1password.com")
+#
+# Dependencies:
+# - `aws-vault`: `brew install aws-vault`
+# - `1Password CLI (op)`: `brew install 1password/tap/1password-cli`
+
+if ! op whoami > /dev/null 2>&1; then
+  echo "[aws-vault-op] 🔑 1Password session not found."
+  eval "$(op signin)" || {
+    echo "[aws-vault-op] 🍎 Failed to sign into 1Password ($OP_ACCOUNT)"
+    exit 1
+  }
+fi
+
+command aws-vault "$@"
