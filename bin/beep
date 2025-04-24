@@ -1,3 +1,11 @@
 #!/bin/sh
 
+# This script plays a system beep or notification sound 🔔
+#
+# Usage:
+#   beep
+#
+# Dependencies:
+# - macOS: Uses built-in `afplay` or `say` command
+
 osascript -e 'beep'
