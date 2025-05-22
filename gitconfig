@@ -26,14 +26,8 @@
   ca = !git commit --amend -v --date=\"$(date +%Y-%m-%dT%H:%M:%S)\"
   # Shorthand for checkout 🔄
   co = checkout
-  # Shorthand for status 📊
-  st = status
   # Detailed log with stats and signatures 📜
   lg = log --stat --summary --show-signature
-  # Mark commit to be fixed up in rebase 🔧
-  fixup = commit --fixup
-  # Mark commit to be squashed in rebase 🤏
-  squash = commit --squash
   # Set upstream to origin/current-branch 🔗
   track = !git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD)
 [push]

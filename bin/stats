@@ -1,0 +1,69 @@
+#!/bin/bash
+
+# 📊 Shell Command Stats
+# Analyzes your shell history to show most-used commands or subcommands.
+# Works with Zsh and Bash history formats, including multiline and piped commands.
+#
+# "stats" = Command Usage Stats
+#
+# Usage:
+#   stats            # Shows top-level command usage
+#   stats <command>  # Shows subcommands/flags for the given command
+#   stats --help     # Show usage info
+#
+# Behavior:
+#   ✅ Aggregates command usage frequency
+#   🔍 Supports drill-down: e.g., 'git' → status, commit, log, etc.
+#   🧠 Handles multiline, piped, and redirected commands
+#   🧼 Cleans invalid UTF-8 characters
+
+# ----------------------------
+# 📘 Help
+# ----------------------------
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+  echo "📊 Shell Command Stats"
+  echo ""
+  echo "Usage:"
+  echo "  stats            # Show top-level command usage"
+  echo "  stats <command>  # Show subcommands of <command>"
+  echo ""
+  echo "Examples:"
+  echo "  stats             # → git, ls, curl, etc."
+  echo "  stats git         # → status, commit, push, etc."
+  exit 0
+fi
+
+# ----------------------------
+# 📦 Config & Preprocessing
+# ----------------------------
+HISTFILE="${HISTFILE:-$HOME/.zsh_history}"
+SEPARATORS='[|;&><()]'
+FILTER="$1"
+
+# Load and clean history file
+HISTORY=$(cat "$HISTFILE" 2>/dev/null \
+  | LC_ALL=C sed 's/^: [0-9]*:[0-9]*;//' \
+  | perl -pe 's/\\\n/ /g' \
+  | iconv -f utf-8 -t utf-8 -c)
+
+# ----------------------------
+# 🔍 Main Logic
+# ----------------------------
+if [[ -z "$FILTER" ]]; then
+  echo "📊 Top-Level Commands:"
+  echo "$HISTORY" \
+    | tr "$SEPARATORS" '\n' \
+    | sed 's/^[[:space:]]*//' \
+    | awk '{print $1}' \
+    | grep -v '^$' \
+    | sort | uniq -c | sort -rn
+else
+  echo "📊 Subcommands for '$FILTER':"
+  echo "$HISTORY" \
+    | grep -E "(^|[|;&><]) *$FILTER " \
+    | tr "$SEPARATORS" '\n' \
+    | sed 's/^[[:space:]]*//' \
+    | grep -E "^$FILTER " \
+    | awk '{print $2}' \
+    | sort | uniq -c | sort -rn
+fi
