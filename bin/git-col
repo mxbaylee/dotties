@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Checks out a branch with a decorated name from a Linear ticket ID.
+# If the branch already exists, checks it out.
+# Otherwise, creates and checks it out.
+#
+# "git col" = git CheckOut Linear (branch)
+#
+# Usage:
+#   git col <linear-branch-name>
+#
+# Behavior:
+#   ✅ Existing branch: checks it out
+#   🌱 New branch: decorates and creates it
+
+if [ -z "$1" ]; then
+  echo "💁 Usage: git col <linear-branch-name>"
+  echo "Example: git col bschmeisser/web-4086"
+  exit 1
+fi
+
+branch=$(linear-branch-decorator "$1")
+
+if git rev-parse --verify --quiet "$branch" >/dev/null; then
+  git checkout "$branch"
+else
+  git checkout -b "$branch"
+fi

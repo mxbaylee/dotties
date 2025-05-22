@@ -36,8 +36,6 @@
   squash = commit --squash
   # Set upstream to origin/current-branch 🔗
   track = !git branch --set-upstream-to=origin/$(git rev-parse --abbrev-ref HEAD)
-  # Checkout new branch with Linear ticket title 🏷️
-  col = "!f() { if [ $# -eq 1 ]; then branch=$(linear-branch-decorator \"$1\"); git checkout -b \"$branch\"; else git checkout \"$@\"; fi; }; f"
 [push]
   default = current
 [pull]
