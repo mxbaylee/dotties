@@ -4,3 +4,6 @@ venv
 .husky
 node_modules
 .DS_Store
+.setup.sh
+__debug_bin*
+go.work.sum
