@@ -1,6 +1,7 @@
 # zshrc 🐚
 # ZSH configuration with oh-my-zsh setup
 
+zstyle ':omz:update' mode auto
 ZSH_THEME="avit"
 export PATH="$HOME/.bin:$PATH"
 export ZSH=~/.oh-my-zsh
