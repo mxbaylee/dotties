@@ -1,17 +1,48 @@
 #!/bin/bash
 
-# Repeatedly runs a command with optional delay between executions.
+# 🔄 Repeatedly runs a command with optional delay between executions.
 #
 # Usage:
-#   infinite         command  # Run continuously
-#   infinite 5       command  # Run every 5 seconds
+#   infinite         command  # Run continuously ♾️
+#   infinite 5       command  # Run every 5 seconds ⏰
 #
 # Example:
-#   infinite 2 date  # Shows date every 2 seconds
+#   infinite 2 date         # Run `date` every 2 seconds 📅
+#   infinite 2 npm run dev  # Run `npm run dev`, restart it every 2s after it exits 🚀
+
+show_help() {
+  cat << EOF
+🔄 infinite - Command Repeater Tool
+
+Usage: infinite [OPTIONS] [DELAY] COMMAND
+
+Repeatedly runs a command with optional delay between executions.
+
+OPTIONS:
+  -h, --help    Show this help message and exit 📖
+
+ARGUMENTS:
+  DELAY         Number of seconds to wait between command executions (default: 0) ⏱️
+  COMMAND       The command to run repeatedly 🔧
+
+EXAMPLES:
+  infinite date                   # Run 'date' continuously ♾️
+  infinite 5 date                 # Run 'date' every 5 seconds ⏰
+  infinite 2 npm run dev          # Run 'npm run dev', restart every 2s after exit 🚀
+  infinite --help                 # Show this help message 📚
+
+EOF
+}
 
 is_number() {
   [[ "$1" =~ ^[0-9]+$ ]]
 }
+
+# Check for help flags 🆘
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+  show_help
+  exit 0
+fi
 
 sleep_time=${1}
 if ! is_number "$sleep_time"; then
@@ -22,6 +53,7 @@ fi
 
 command="$@"
 
+# Infinite loop starts here! 🔄
 while true; do
   eval "$command"
   sleep $sleep_time
