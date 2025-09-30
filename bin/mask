@@ -1,0 +1,40 @@
+#!/bin/sh
+
+# This scripts masks secret variables so you can verify without fully outputting them.
+#
+# Usage:
+#   mask $FOOBAR
+
+# get value either from first arg or from stdin
+if [ "$#" -ge 1 ]; then
+  v="$1"
+elif [ ! -t 0 ]; then
+  v="$(cat -)"
+  # remove a single trailing newline if present (keeps content otherwise)
+  v="${v%$'\n'}"
+else
+  printf 'Usage: mask "$VALUE"  OR  printf "%%s" "$VALUE" | mask\n' >&2
+  exit 2
+fi
+
+len=${#v}
+
+# empty -> print empty line
+if [ "$len" -eq 0 ]; then
+  printf '\n'
+  exit 0
+fi
+
+if [ "$len" -le 3 ]; then
+  # print stars for each character
+  stars=$(printf '%*s' "$len" '' | tr ' ' '*')
+  printf '%s\n' "$stars"
+  exit 0
+fi
+
+# len > 3: stars for all but last 3, then show last 3
+keep=$((len - 3))
+stars=$(printf '%*s' "$keep" '' | tr ' ' '*')
+# show last 3 characters
+suffix="${v:keep:3}"
+printf '%s%s\n' "$stars" "$suffix"
