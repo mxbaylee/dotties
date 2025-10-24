@@ -2,6 +2,7 @@
 # ZSH configuration with oh-my-zsh setup
 
 zstyle ':omz:update' mode auto
+zstyle ':omz:update' frequency 1
 ZSH_THEME="avit"
 export PATH="$HOME/.bin:$PATH"
 export ZSH=~/.oh-my-zsh
@@ -48,6 +49,23 @@ function cd () {
   if [ -n "$TMUX" ]; then
     tmux rename-window $(window_name)
   fi
+}
+
+
+# 🐳 Wrapper for the Docker CLI that auto-starts Docker Desktop on macOS if it’s not already
+# running. This prevents the classic “Cannot connect to the Docker daemon” error when you
+# forget to launch Docker Desktop first.
+docker() {
+  if ! test -S /var/run/docker.sock; then
+    echo "Starting Docker Desktop..."
+    open -a Docker
+    # Wait until Docker socket exists *and* Docker responds
+    while ! test -S /var/run/docker.sock || ! docker info >/dev/null 2>&1; do
+      sleep 1
+    done
+    echo "Docker is ready."
+  fi
+  command docker "$@"
 }
 
 # Oh-my-zsh plugins 🔌
