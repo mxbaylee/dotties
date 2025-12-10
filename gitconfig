@@ -2,7 +2,9 @@
   name = Baylee Schmeisser
   email = github.mx@baylee.dev
 [includeIf "hasconfig:remote.*.url:git@github.com:stytchauth/**"]
-  path = ~/.gitconfig-work
+  path = ~/.gitconfig-stytch
+[includeIf "hasconfig:remote.*.url:git@github.com:twilio-internal/**"]
+  path = ~/.gitconfig-twilio
 [include]
   path = ~/.gitconfig.local
 [core]

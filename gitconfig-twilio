@@ -1,0 +1,6 @@
+[user]
+  email = bschmeisser@twilio.com
+[url "git@github.com:"]
+  insteadOf = https://github.com/
+[url "git@code.hq.twilio.com:"]
+  insteadOf = https://code.hq.twilio.com/
